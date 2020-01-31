@@ -1,4 +1,6 @@
-Fhash - a simple python tool for generating, passing and formatting hash values
+# fhash
+
+## fhash - a simple python tool for generating, passing and formatting hash values
 
 So some may not agree, but I find hash values make very good master passwords for tools like 
 password managers and other security software. Why go with just a passphrase when you can pipe
@@ -21,7 +23,7 @@ $./fhash.py sha2 -i "Hello, World!"
 
 If you really like it and want to use it from anywhere on your system, copy it into your path:
 
-$ sudo cp fhash.py /usr/bin/
+$ sudo cp fhash.py /usr/bin/fhash
 
 No Windows support, yet sorry! Please make a pull request if you want to add that, should be
 easy enough to do, just haven't gotten around to it
@@ -44,4 +46,3 @@ Any and all contributors welcome. Please just make sure any edits are
 1) Compliant with PEP8
 2) Do not have any lines over 95 characters (this is half my screen so it fits nicely
  - not sure if this is a universal standard though)
-# fhash
