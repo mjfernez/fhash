@@ -1,6 +1,6 @@
 # fhash
 
-## fhash - a simple python tool for generating, passing and formatting hash values
+## A simple python tool for generating, passing and formatting hash values
 
 So some may not agree, but I find hash values make very good master passwords for tools like 
 password managers and other security software. Why go with just a passphrase when you can pipe
