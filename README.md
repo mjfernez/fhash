@@ -19,18 +19,18 @@ So here it is (more or less)!
 
 The script is self contained and executable so Linux users can just use:
 
-$./fhash.py sha2 -i "Hello, World!"
+`$./fhash.py sha2 -i "Hello, World!"`
 
 If you really like it and want to use it from anywhere on your system, copy it into your path:
 
-$ sudo cp fhash.py /usr/bin/fhash
+`$ sudo cp fhash.py /usr/bin/fhash`
 
 No Windows support, yet sorry! Please make a pull request if you want to add that, should be
 easy enough to do, just haven't gotten around to it
 
 The default output can be passed to other commands as in:
 
-$ fhash.py md5 -i $(fhash.py sha2 -i "Hello, world!")
+`$ fhash.py md5 -i $(fhash.py sha2 -i "Hello, world!")`
 
 You can optionally use the '-v' flag for more details (mostly was used for debugging), but this
 example above will not work correctly with it
