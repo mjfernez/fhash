@@ -236,7 +236,8 @@ if __name__ == "__main__":
 
         hashes = []
         for j in inp:
-            #print('Calculating {} hash for "{}"...'.format(func, j))
+            if(VERBOSE):
+                print('Calculating {} hash for "{}"...'.format(func, j))
             md = getHash(j, getAlgorithm(func, size))
             formatted = formatOutput(md, fmt)
             hashes.append(formatted)
