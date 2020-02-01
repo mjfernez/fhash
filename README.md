@@ -17,11 +17,17 @@ random guy on the internet. You could use openssl of course, but that's giving y
 than you need. And other command line hashing functions usually stick to one algorithm like
 md5sum. 
 
-So this is my attempt to make a tool in the middle of those.
+So this is my attempt to make a tool in the middle of those. My main goal for this tool is that
+it can serve as an educational resource for those learning how to make command line tools with
+Python and how to use hash functions
 
 The script is self contained and executable so Linux users can just use:
 
 `$./fhash.py sha2 -i "Hello, World!"`
+
+Or if you don't like the .py on the end you can rename it with:
+
+`$mv fhash.py fhash`
 
 If you really like it and want to use it from anywhere on your system, copy it into your path:
 
@@ -45,6 +51,6 @@ open an issue!
 
 
 Any and all contributors welcome. Please just make sure any edits are
-1) Compliant with PEP8
-2) Do not have any lines over 95 characters (this is half my screen on 1920x180 so it fits 
+1) Compliant with PEP8 (highly recommend this tool for editing: https://github.com/coala/coala)
+2) Do not have any lines over 95 characters (this is half my screen on 1920x1080 so it fits 
 nicely - not sure if this is a universal standard though)
