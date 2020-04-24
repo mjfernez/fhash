@@ -1,16 +1,24 @@
 #!/usr/bin/python3
-from io import IOBase
+
+# OS/filesystem
 import os
 import sys
-import argparse
 import locale
+
+# Hash functions
 import hashlib
+# CLI tool
+import argparse
+
+#IO and time
+import time
+from io import IOBase
+
 
 # Defines the basic options and constants used
 algos = ['md5', 'sha1', 'sha2', 'sha3']
 modes = [224, 256, 384, 512]
 formats = ['lowercase', 'uppercase', 'binary', 'decimal']
-slash = '/'
 pwd = os.getcwd()
 os_encoding = locale.getpreferredencoding()
 
@@ -112,7 +120,8 @@ def getAlgorithm(func, size):
     elif(func == 'sha3'):
         return eval('hashlib.sha3_' + str(size) + '()')
     else:
-        print('You somehow passed a function that doesnt exist. Please file a bug report')
+        print('You somehow passed a function that doesnt exist, which should not happen.'
+              'Please file a bug report at https://github.com/mjfernez/fhash')
         print('Quitting...')
         sys.exit()
 
@@ -167,8 +176,8 @@ def getOptions(args=sys.argv[1:]):
                         help='Formatting for the output')
     parser.add_argument('-v', '--verbose',
                         action='store_true',
-                        help='Optionally add additional information to the output. '
-                        'without this flag, the program will just print the hash')
+                        help='Optionally add additional information to the output.'
+                        ' without this flag, the program will just print the hash')
     parser.add_argument('function',
                         choices=algos,
                         help='Use the specified hash function')
@@ -202,6 +211,7 @@ def saveOutput(hashes, output):
 
 
 if __name__ == "__main__":
+    start = time.perf_counter()
     try:
         opts = getOptions(sys.argv[1:])
         inp = opts.input
@@ -235,6 +245,7 @@ if __name__ == "__main__":
             sys.exit()
 
         hashes = []
+        last_clock = time.perf_counter_ns()
         for j in inp:
             if(VERBOSE):
                 print('Calculating {} hash for "{}"...'.format(func, j))
@@ -244,15 +255,21 @@ if __name__ == "__main__":
             if(out == None):
                 print(formatted)
 
+            if(VERBOSE):
+                curr_clock = time.perf_counter_ns()
+                print('Completed in {}ns'.format(curr_clock - last_clock))
+                last_clock = curr_clock
+
         if(out != None):
             if(out.endswith('.csv')):
                 saveOutput(['{}, {}'.format(i, j)
                             for i, j in zip(inp, hashes)], out)
             else:
                 saveOutput(hashes, out)
+
+        if(VERBOSE):
+            end = time.perf_counter()
+            print('The job took {}s total'.format(end - start))
     except (KeyboardInterrupt):
         print('\nUser stopped the program')
-        sys.exit()
-    except:
-        print('\nUnexpected Error')
         sys.exit()

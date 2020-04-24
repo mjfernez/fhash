@@ -33,15 +33,16 @@ If you really like it and want to use it from anywhere on your system, copy it i
 
 `$ sudo cp fhash.py /usr/bin/fhash`
 
-No Windows support, yet sorry! Please make a pull request if you want to add that, should be
-easy enough to do, just haven't gotten around to it
+I haven't tested Windows yet, sorry! It probably works since I use relative path names, but
+I'm not 100% sure. Please make a pull request if you want to test that, it should be easy 
+enough to do, just haven't gotten around to it
 
 The default output can be passed to other commands as in:
 
 `$ fhash.py md5 -i $(fhash.py sha2 -i "Hello, world!")`
 
-You can optionally use the '-v' flag for more details (mostly was used for debugging), but this
-example above will not work correctly with it
+You can optionally use the '-v' flag for more details and timing, but you will not be able to 
+pipe the output the same way, so this is more of an experimental option than anything
 
 Use '-h' '--help' to see the list of flags and how to use them. If you have suggestions on how
 to improve the help menu to make the tool easier to understand, please submit a pull request or
