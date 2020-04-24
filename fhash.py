@@ -7,13 +7,13 @@ import locale
 
 # Hash functions
 import hashlib
+
 # CLI tool
 import argparse
 
 #IO and time
 import time
 from io import IOBase
-
 
 # Defines the basic options and constants used
 algos = ['md5', 'sha1', 'sha2', 'sha3']
