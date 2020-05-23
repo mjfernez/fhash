@@ -141,7 +141,7 @@ def getHash(msg, algo):
         with open(msg, 'rb') as f:
             while True:
                 buf = f.read(BUFF_SIZE)
-
+                
                 # If there's no data read into the buffer, EOF
                 if not buf:
                     break
@@ -228,7 +228,7 @@ if __name__ == "__main__":
         size = opts.size
         fmt = opts.format
         VERBOSE = opts.verbose
-
+        
         if(inp == None):
             print('Error: No input given')
             sys.exit()

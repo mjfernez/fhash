@@ -23,15 +23,15 @@ Python and how to use hash functions
 
 The script is self contained and executable so Linux users can just use:
 
-`$./fhash.py sha2 -i "Hello, World!"`
+`$ ./fhash.py sha2 -i "Hello, World!"`
 
 Or if you don't like the .py on the end you can rename it with:
 
-`$mv fhash.py fhash`
+`$ mv fhash.py fhash`
 
-If you really like it and want to use it from anywhere on your system, copy it into your path:
+If you really like it and want to use it from anywhere on your system, copy it into your path (run as root):
 
-`$ sudo cp fhash.py /usr/bin/fhash`
+`# cp fhash.py /usr/bin/fhash`
 
 I haven't tested Windows yet, sorry! It probably works since I use relative path names, but
 I'm not 100% sure. Please make a pull request if you want to test that, it should be easy 
@@ -51,7 +51,4 @@ open an issue!
 (Don't run the script itself as administrator by the way, this sometimes messes things up)
 
 
-Any and all contributors welcome. Please just make sure any edits are
-1) Compliant with PEP8 (highly recommend this tool for editing: https://github.com/coala/coala)
-2) Do not have any lines over 95 characters (this is half my screen on 1920x1080 so it fits 
-nicely - not sure if this is a universal standard though)
+Any and all contributors welcome. Please just make sure any edits are compliant with PEP8 (highly recommend this tool for editing: https://github.com/coala/coala)
