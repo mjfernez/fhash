@@ -13,7 +13,6 @@ import argparse
 
 #IO and time
 import time
-from io import IOBase
 
 # Defines the basic options and constants used
 algos = ['md5', 'sha1', 'sha2', 'sha3']
@@ -27,6 +26,9 @@ DEFAULT_SIZE = 256
 
 # For the verbose option
 VERBOSE = False
+
+# For splitting data into chunks for larger files for accurate hash values
+BUFF_SIZE = 2048
 
 '''Checks if the user put a directory as an input to a hash function.
 As I see it, hashing a directory is ambiguous since it's not clear if you 
@@ -135,13 +137,19 @@ This takes an input string or file "msg" and hashes it with "algo"
 
 def getHash(msg, algo):
     hasher = algo
-    if(isinstance(msg, IOBase)):
+    if(os.path.isfile(msg)):
         with open(msg, 'rb') as f:
-            buf = f.read()
-            hasher.update(buf)
+            while True:
+                buf = f.read(BUFF_SIZE)
+                
+                # If there's no data read into the buffer, EOF
+                if not buf:
+                    break
+
+                hasher.update(buf)
     else:
         buf = msg
-        hasher.update(msg.encode(os_encoding))
+        hasher.update(buf.encode(os_encoding))
     return hasher.hexdigest()
 
 
@@ -220,7 +228,7 @@ if __name__ == "__main__":
         size = opts.size
         fmt = opts.format
         VERBOSE = opts.verbose
-
+        
         if(inp == None):
             print('Error: No input given')
             sys.exit()
