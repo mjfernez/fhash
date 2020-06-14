@@ -19,7 +19,9 @@ md5sum.
 
 So this is my attempt to make a tool in the middle of those. My main goal for this tool is that
 it can serve as an educational resource for those learning how to make command line tools with
-Python and how to use hash functions
+Python and how to use hash functions. And for making it easy to pipe hashes to other programs.
+
+All libraries are in the Python Standard Library, all you need is Python 3
 
 The script is self contained and executable so Linux users can just use:
 
@@ -31,7 +33,7 @@ Or if you don't like the .py on the end you can rename it with:
 
 If you really like it and want to use it from anywhere on your system, copy it into your path (run as root):
 
-`# cp fhash.py /usr/bin/fhash`
+`# cp fhash.py /usr/local/bin/fhash.py`
 
 I haven't tested Windows yet, sorry! It probably works since I use relative path names, but
 I'm not 100% sure. Please make a pull request if you want to test that, it should be easy 
@@ -39,7 +41,15 @@ enough to do, just haven't gotten around to it
 
 The default output can be passed to other commands as in:
 
-`$ fhash.py md5 -i $(fhash.py sha2 -i "Hello, world!")`
+`$ fhash.py md5 -i $(fhash.py sha2 -i "Hello, world\!")`
+
+Or you can pipe the output like this:
+
+`$ fhash.py sha2 -i "Hello, world\!" -f uppercase | fhash.py md5 -i {}`
+
+Or if you want to be fancy, pipe to other formatting programs :)
+
+`$ fhash sha3 -i "LOLcats\!" -f binary | cowsay | lolcat`
 
 You can optionally use the '-v' flag for more details and timing, but you will not be able to 
 pipe the output the same way, so this is more of an experimental option than anything
@@ -48,7 +58,8 @@ Use '-h' '--help' to see the list of flags and how to use them. If you have sugg
 to improve the help menu to make the tool easier to understand, please submit a pull request or
 open an issue!
 
-(Don't run the script itself as administrator by the way, this sometimes messes things up)
+Don't run the script itself as administrator by the way, this sometimes messes things up when opening files
 
 
-Any and all contributors welcome. Please just make sure any edits are compliant with PEP8 (highly recommend this tool for editing: https://github.com/coala/coala)
+Any and all contributors welcome. Please just make sure any edits are compliant with PEP8 
+I highly recommend this tool for editing: https://github.com/coala/coala
