@@ -97,7 +97,8 @@ def formatOutput(msg, fmt):
     elif(fmt == 'uppercase'):
         return msg.upper()
     elif(fmt == 'binary'):
-        return '{}'.format(bin(int(msg, 16)))
+                                            #Omit the trailing 0b
+        return '{}'.format(bin(int(msg, 16))[2:].zfill(8))
     elif(fmt == 'decimal'):
         return str(int(msg, 16))
     else:
