@@ -35,9 +35,9 @@ If you really like it and want to use it from anywhere on your system, copy it i
 
 `# cp fhash.py /usr/local/bin/fhash.py`
 
-I haven't tested Windows yet, sorry! It probably works since I use relative path names, but
-I'm not 100% sure. Please make a pull request if you want to test that, it should be easy 
-enough to do, just haven't gotten around to it
+The program also runs on Windows, but you'll need to run it through python:
+
+`> python3 fhash.py sha2 -i "I<3Windows"`
 
 The default output can be passed to other commands as in:
 
@@ -54,6 +54,9 @@ Or if you want to be fancy, pipe to other formatting programs :)
 Or go completely crazy:
 
 ![alt text](https://github.com/mjfernez/fhash/blob/master/fhash-example.png?raw=true)
+
+The input need not be a string, you can also put files, a list of files, or a
+folder to hash. You can also use descriptors like '\*' or '.'
 
 You can optionally use the '-v' flag for more details and timing, but you will not be able to 
 pipe the output the same way, so this is more of an experimental option than anything
