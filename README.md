@@ -49,7 +49,11 @@ Or you can pipe the output like this:
 
 Or if you want to be fancy, pipe to other formatting programs :)
 
-`$ fhash sha3 -i "LOLcats\!" -f binary | cowsay | lolcat`
+`$ fhash sha3 -i "LOLcats\!" -f binary | lolcat`
+
+Or go completely crazy:
+
+![alt text](https://github.com/mjfernez/fhash/blob/master/fhash-example.png?raw=true)
 
 You can optionally use the '-v' flag for more details and timing, but you will not be able to 
 pipe the output the same way, so this is more of an experimental option than anything
