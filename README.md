@@ -17,7 +17,7 @@ random guy on the internet. You could use openssl of course, but that's giving y
 than you need. And other command line hashing functions usually stick to one algorithm like
 md5sum. 
 
-For example, here's how you'd take the sha3 hash, with a message size of 256, and capitalize it:
+For example, here's how you'd take the sha3 hash, with a message size of 256, and capitalize it in bash:
 
 `echo "password" | openssl dgst -sha3-256 | cut -c 10- | tr "[:lower:]" "[:upper:]"`
 
@@ -27,7 +27,7 @@ So this is my attempt to make a tool in the middle of those. My main goal for th
 it can serve as an educational resource for those learning how to make command line tools with
 Python and how to use hash functions. And for making it easy to pipe hashes to other programs.
 
-All libraries are in the Python Standard Library, all you need is Python 3
+All libraries are in the Python Standard Library, all you need is Python 3, no other dependencies!
 
 The script is self contained and executable so Linux users can just use:
 
@@ -63,10 +63,11 @@ Or go completely crazy:
 
 ![alt text](https://github.com/mjfernez/fhash/blob/master/fhash-example.png?raw=true)
 
-The input need not be a string, you can also put files, a list of files, or a
+The input need not be a string, you can also put files, a list of files, or a 
 folder to hash. You can also use descriptors like '\*' or '.'
 
-For SHA2 and SHA3, you can set the size of the output using the '-s' flag. Run with '-s 0' to see a list of supported sizes. 
+For SHA2 and SHA3, you can set the size of the output using the '-s' flag. 
+Run with '-s 0' to see a list of supported sizes.<br>
 This flag is simply ignored for SHA1 and MD5 since they only have one output size
 
 You can optionally use the '-v' flag for more details and timing, but you will not be able to 
