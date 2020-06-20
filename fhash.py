@@ -1,5 +1,11 @@
 #!/usr/bin/python3
+"""
+fhash is a simple python tool for generating, passing and formatting hash 
+values. It can be used to print hashes of strings or files in various formats
+including as a hex string (lower and uppercase), binary string, or decimal
+number. It can also be used for testing the speed of these various functions
 
+"""
 # OS/filesystem
 import os
 import sys
@@ -18,7 +24,6 @@ import time
 algos = ['md5', 'sha1', 'sha2', 'sha3']
 modes = [224, 256, 384, 512]
 formats = ['lowercase', 'uppercase', 'binary', 'decimal']
-pwd = os.getcwd()
 os_encoding = locale.getpreferredencoding()
 
 # For sha256 and sha3 only
@@ -30,34 +35,18 @@ VERBOSE = False
 # For splitting data into chunks for larger files for accurate hash values
 BUFF_SIZE = 2048
 
-'''Checks if the user put a directory as an input to a hash function.
-As I see it, hashing a directory is ambiguous since it's not clear if you 
-want to hash everything in the directory or the file structure itself.
-
-But if you want to hash everything, you can just use just use /<directory>/* 
-It's probably easier in other use-cases to zip the whole file structure and hash that.
-@obj: the string or file object inputted by the user (Note: expects a file)
-'''
+# For handling directories
+DIR_ERROR = 'Error: "{}" specified is a directory.'
 
 
-def checkDirectory(obj):
-    if os.path.isdir(obj):
-        print('Error: "{}" specified is a directory. Must be a file'.format(obj))
-        return True
-    else:
-        return False
-
-
-'''Specifies the size in bits of the chosen function.
-If the user put in a invalid length, throw an error
-Returns the default length if no size is provided
-@func: the hash function use (md5, sha1, sha2, sha3)
-@size: the desired length of the output. i.e. sha256 
-        outputs a message of 256 bits or 64 hex-digits
-'''
-
-
-def checkFunction(func, size):
+def check_function(func, size):
+    """Specifies the size in bits of the chosen function.
+    If the user put in a invalid length, throw an error
+    Returns the default length if no size is provided
+    @func: the hash function use (md5, sha1, sha2, sha3)
+    @size: the desired length of the output. i.e. sha256 
+            outputs a message of 256 bits or 64 hex-digits
+    """
     if(func in algos[0:2]):
         bsize = 160 if (algos.index(func)) else 128
         if(size == None):
@@ -85,19 +74,17 @@ def checkFunction(func, size):
             return size
 
 
-'''Formats the hash value according to the user's choice
-@msg: the string to be formatted
-@fmt: the target format
-'''
-
-
-def formatOutput(msg, fmt):
+def format_output(msg, fmt):
+    """Formats the hash value according to the user's choice
+    @msg: the string to be formatted
+    @fmt: the target format
+    """
     if(fmt == 'lowercase'):
         return msg.lower()
     elif(fmt == 'uppercase'):
         return msg.upper()
     elif(fmt == 'binary'):
-                                            #Omit the trailing 0b
+        # Omit the trailing 0b
         return '{}'.format(bin(int(msg, 16))[2:].zfill(8))
     elif(fmt == 'decimal'):
         return str(int(msg, 16))
@@ -106,14 +93,12 @@ def formatOutput(msg, fmt):
         sys.exit()
 
 
-'''Returns the requested hash function "func" at the specified "size" (if it applies)
-@func: the hash function use (md5, sha1, sha2, sha3)
-@size: the desired length of the output. i.e. sha256 
-        outputs a message of 256 bits or 64 hex-digits
-'''
-
-
-def getAlgorithm(func, size):
+def get_algorithm(func, size):
+    """Returns the requested hash function "func" at the specified "size" (if it applies)
+    @func: the hash function use (md5, sha1, sha2, sha3)
+    @size: the desired length of the output. i.e. sha256 
+            outputs a message of 256 bits or 64 hex-digits
+    """
     if(func == 'md5'):
         return hashlib.md5()
     elif(func == 'sha1'):
@@ -129,14 +114,12 @@ def getAlgorithm(func, size):
         sys.exit()
 
 
-'''The core hasing function. 
-This takes an input string or file "msg" and hashes it with "algo"
-@msg: the string or file to be hashed
-@algo: the hashing algorithm to use
-'''
-
-
-def getHash(msg, algo):
+def get_hash(msg, algo):
+    """The core hasing function. 
+    This takes an input string or file "msg" and hashes it with "algo"
+    @msg: the string or file to be hashed
+    @algo: the hashing algorithm to use
+    """
     hasher = algo
     if(os.path.isfile(msg)):
         with open(msg, 'rb') as f:
@@ -154,12 +137,10 @@ def getHash(msg, algo):
     return hasher.hexdigest()
 
 
-'''Sets up the tool to parse arguments correctly (help menu is added by default)
-@args: all arguments inputted by the user
-'''
-
-
-def getOptions(args=sys.argv[1:]):
+def get_options(args=sys.argv[1:]):
+    """Sets up the tool to parse arguments correctly (help menu is added by default)
+    @args: all arguments inputted by the user
+    """
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-i', '--input',
@@ -194,14 +175,12 @@ def getOptions(args=sys.argv[1:]):
     return parser.parse_args(args)
 
 
-'''Saves one or more hashes to file. Overwrites the file if it exists
-@hashes: the hash or list of hashes to be saved
-@output: the output destination specified by the user 
-            (expects a file or "None" to print to screen)
-'''
-
-
-def saveOutput(hashes, output):
+def save_output(hashes, output):
+    """Saves one or more hashes to file. Overwrites the file if it exists
+    @hashes: the hash or list of hashes to be saved
+    @output: the output destination specified by the user 
+                (expects a file or "None" to print to screen)
+    """
     while(os.path.isfile(output)):
         opt = input('That file exists. Ok to overwrite? (y/n): ')
         if(opt.lower() in ['y', 'yes']):
@@ -219,10 +198,10 @@ def saveOutput(hashes, output):
     print('File {} created!'.format(output))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     start = time.perf_counter()
     try:
-        opts = getOptions(sys.argv[1:])
+        opts = get_options(sys.argv[1:])
         inp = opts.input
         out = opts.output
         func = opts.function
@@ -235,16 +214,19 @@ if __name__ == "__main__":
             sys.exit()
 
         # Check to make sure size and function inputs are valid
-        size = checkFunction(func, size)
+        size = check_function(func, size)
 
         # If the user chose to output to a file/directory
         if(out != None):
-            if(checkDirectory(out)):
+            if os.path.isdir(out):
+                print(DIR_ERROR.format(out) + ' Output must be a file.')
                 sys.exit()
 
         # Go through the list of arguments provided by the user after the -i option
+        # Remove directories
         for i in inp:
-            if(checkDirectory(i)):
+            if os.path.isdir(i):
+                print(DIR_ERROR.format(i))
                 inp.remove(i)
 
        # After going through the list, check to see if there are any files to hash
@@ -258,8 +240,8 @@ if __name__ == "__main__":
         for j in inp:
             if(VERBOSE):
                 print('Calculating {} hash for "{}"...'.format(func, j))
-            md = getHash(j, getAlgorithm(func, size))
-            formatted = formatOutput(md, fmt)
+            md = get_hash(j, get_algorithm(func, size))
+            formatted = format_output(md, fmt)
             hashes.append(formatted)
             if(out == None):
                 print(formatted)
@@ -271,10 +253,10 @@ if __name__ == "__main__":
 
         if(out != None):
             if(out.endswith('.csv')):
-                saveOutput(['{}, {}'.format(i, j)
-                            for i, j in zip(inp, hashes)], out)
+                save_output(['{}, {}'.format(i, j)
+                             for i, j in zip(inp, hashes)], out)
             else:
-                saveOutput(hashes, out)
+                save_output(hashes, out)
 
         if(VERBOSE):
             end = time.perf_counter()

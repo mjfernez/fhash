@@ -80,5 +80,5 @@ open an issue!
 Don't run the script itself as administrator by the way, this sometimes messes things up when opening files
 
 
-Any and all contributors welcome. Please just make sure any edits are compliant with PEP8 
+Any and all contributors welcome. Please just make sure any edits are compliant with PEP8.<br> 
 I highly recommend this tool for editing: https://github.com/coala/coala
