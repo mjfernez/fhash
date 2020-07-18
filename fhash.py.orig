@@ -44,17 +44,17 @@ def check_function(func, size):
     If the user put in a invalid length, throw an error
     Returns the default length if no size is provided
     @func: the hash function use (md5, sha1, sha2, sha3)
-    @size: the desired length of the output. i.e. sha256
+    @size: the desired length of the output. i.e. sha256 
             outputs a message of 256 bits or 64 hex-digits
     """
     if (func in algos[0:2]):
         bsize = 160 if (algos.index(func)) else 128
         if (size == None):
             v_print('Using default message size of ' +
-                    '{} bits'.format(bsize))
+                      '{} bits'.format(bsize))
         else:
             v_print('Warning: "size" option is ignored for ' +
-                    'sha1 and md5 since they are fixed-length')
+                'sha1 and md5 since they are fixed-length')
             v_print('Using message size of {} bits'.format(bsize))
         return bsize
     else:
@@ -91,7 +91,7 @@ def format_output(msg, fmt):
 def get_algorithm(func, size):
     """Returns the requested hash function "func" at the specified "size" (if it applies)
     @func: the hash function use (md5, sha1, sha2, sha3)
-    @size: the desired length of the output. i.e. sha256
+    @size: the desired length of the output. i.e. sha256 
             outputs a message of 256 bits or 64 hex-digits
     """
     if (func == 'md5'):
@@ -110,7 +110,7 @@ def get_algorithm(func, size):
 
 
 def get_hash(msg, algo):
-    """The core hasing function.
+    """The core hasing function. 
     This takes an input string or file "msg" and hashes it with "algo"
     @msg: the string or file to be hashed
     @algo: the hashing algorithm to use
@@ -172,7 +172,7 @@ def get_options(args=sys.argv[1:]):
 def save_output(hashes, output):
     """Saves one or more hashes to file. Overwrites the file if it exists
     @hashes: the hash or list of hashes to be saved
-    @output: the output destination specified by the user
+    @output: the output destination specified by the user 
                 (expects a file or "None" to print to screen)
     """
     while (os.path.isfile(output)):
@@ -191,14 +191,11 @@ def save_output(hashes, output):
         f.truncate()
     print('File {} created!'.format(output))
 
-
 # v_print is a function conditionally defined if the user passes the verbose
 # option.
 # This is preferable to writing "if (VERBOSE)" everytime we need to print error
 # info
 v_print = None
-
-
 def main():
     start = time.perf_counter()
     opts = get_options(sys.argv[1:])
@@ -217,7 +214,7 @@ def main():
         def _v_print(arg):
             print(arg)
     else:
-        _v_print = lambda *a: None  # do nothing
+        _v_print = lambda *a: None # do nothing
 
     global v_print
     v_print = _v_print
@@ -267,7 +264,6 @@ def main():
 
     end = time.perf_counter()
     v_print('The job took {}s total'.format(end - start))
-
 
 if __name__ == '__main__':
     try:
