@@ -50,11 +50,11 @@ def check_function(func, size):
     if (func in algos[0:2]):
         bsize = 160 if (algos.index(func)) else 128
         if (size == None):
-            v_print('Using default message size of ' +
-                    '{} bits'.format(bsize))
+            v_print('Using default message size of \
+                    {} bits'.format(bsize))
         else:
-            v_print('Warning: "size" option is ignored for ' +
-                    'sha1 and md5 since they are fixed-length')
+            v_print('Warning: "size" option is ignored for  \
+                    sha1 and md5 since they are fixed-length')
             v_print('Using message size of {} bits'.format(bsize))
         return bsize
     else:
@@ -62,7 +62,8 @@ def check_function(func, size):
             v_print('Using default message size, 256-bits')
             return DEFAULT_SIZE
         elif (size not in modes):
-            print('Error: Message size must be 224, 256, 384, or 512 for {}'.format(func))
+            print('Error: Message size must be  \
+            224, 256, 384, or 512 for {}'.format(func))
             sys.exit()
         else:
             v_print('Using message size of {} bits'.format(size))
@@ -89,7 +90,8 @@ def format_output(msg, fmt):
 
 
 def get_algorithm(func, size):
-    """Returns the requested hash function "func" at the specified "size" (if it applies)
+    """Returns the requested hash function "func" at the specified "size"
+    (if it applies)
     @func: the hash function use (md5, sha1, sha2, sha3)
     @size: the desired length of the output. i.e. sha256
             outputs a message of 256 bits or 64 hex-digits
@@ -103,7 +105,8 @@ def get_algorithm(func, size):
     elif (func == 'sha3'):
         return eval('hashlib.sha3_' + str(size) + '()')
     else:
-        print('You somehow passed a function that doesnt exist, which should not happen.'
+        print('You somehow passed an invalid function, \
+        which should not happen.'
               'Please file a bug report at https://github.com/mjfernez/fhash')
         print('Quitting...')
         sys.exit()
@@ -132,7 +135,8 @@ def get_hash(msg, algo):
 
 
 def get_options(args=sys.argv[1:]):
-    """Sets up the tool to parse arguments correctly (help menu is added by default)
+    """Sets up the tool to parse arguments correctly
+    (help menu is added by default)
     @args: all arguments inputted by the user
     """
     parser = argparse.ArgumentParser()
@@ -140,7 +144,9 @@ def get_options(args=sys.argv[1:]):
     parser.add_argument('-i', '--input',
                         nargs='+',
                         required=True,
-                        help='Input file or text. Try using sha2 -i "Hello, World!"')
+                        help='Input file or text. \
+                        Try using sha2 -i "Hello, World!"'
+                        )
     parser.add_argument('-o', '--output',
                         nargs='?',
                         default=None,
@@ -148,7 +154,8 @@ def get_options(args=sys.argv[1:]):
                         'Prints to screen if none specified. '
                         'You can save a comma separated list '
                         'of files and hashes by specifying the '
-                        'file extension ".csv", otherwise saves hash values only as text')
+                        'file extension ".csv", otherwise saves hash values \
+                        only as text')
     parser.add_argument('-s', '--size',
                         default=None,
                         type=int,
@@ -160,8 +167,9 @@ def get_options(args=sys.argv[1:]):
                         help='Formatting for the output')
     parser.add_argument('-v', '--verbose',
                         action='store_true',
-                        help='Optionally add additional information to the output.'
-                        ' without this flag, the program will just print the hash')
+                        help='Optionally add additional information to the \
+                        output. Without this flag, the program will just \
+                        print the hash')
     parser.add_argument('function',
                         choices=algos,
                         help='Use the specified hash function')
